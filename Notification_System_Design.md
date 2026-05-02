@@ -219,3 +219,89 @@ The proposed system ensures:
 - Efficient prioritization of important notifications
 - Scalability with continuous updates
 - Clear and maintainable logic without database dependency
+
+---
+
+## Stage 2: Frontend Application
+
+### Overview
+Stage 2 implements a responsive React/Next.js frontend using Material UI that displays notifications with full filtering, pagination, and read/unread status tracking.
+
+### Features
+- **All Notifications Tab** — Display all notifications from evaluation API
+- **Type Filtering** — Separate tabs for Placement, Result, Event
+- **Pagination** — Support for limit and page query parameters
+- **Read/Unread Tracking** — Toggle notification read status
+- **Save Notifications** — Bookmark important notifications
+- **Responsive Design** — Optimized for mobile and desktop
+- **Material UI Styling** — Professional component library (no native CSS)
+- **Error Handling** — Graceful error messages and loading states
+
+### Tech Stack
+- **React 18** — UI component library
+- **Next.js 13** — React framework with server-side rendering
+- **Material UI v5** — Professional component library (mandatory)
+- **Emotion** — CSS-in-JS styling engine
+
+### App Structure
+```
+notification_app_fe/
+├── app/
+│   ├── page.jsx           # Root page component
+│   ├── layout.jsx         # App layout with theme
+│   ├── dashboard.jsx      # Main notification dashboard
+│   └── NotificationCard.jsx # Individual notification card
+├── next.config.js         # Next.js configuration
+├── package.json           # Dependencies and scripts
+└── README.md              # Frontend documentation
+```
+
+### Key Components
+
+**page.jsx** — Root component with Material UI theme provider  
+**layout.jsx** — AppBar header and page structure  
+**dashboard.jsx** — Main dashboard with:
+  - Tab navigation for filtering
+  - Notification list rendering
+  - Pagination controls
+  - API data fetching
+
+**NotificationCard.jsx** — Individual notification display with:
+  - Type badge (color-coded)
+  - Message and timestamp
+  - Read/Unread toggle button
+  - Save/Bookmark button
+
+### API Integration
+- Endpoint: `http://20.207.122.201/evaluation-service/notifications`
+- Query Parameters:
+  - `limit` — Number of notifications per page (default: 10)
+  - `page` — Page number (default: 1)
+  - `notification_type` — Filter by type (Placement, Result, Event)
+
+### Running Stage 2
+```bash
+cd notification_app_fe
+npm install
+npm run dev
+```
+Open `http://localhost:3000` in browser
+
+### UI Design Principles
+✅ **No Clutter** — Clean, minimal interface  
+✅ **Material Design** — Follow MUI guidelines  
+✅ **Responsive** — Mobile-first approach  
+✅ **Fast** — Optimized load times  
+✅ **Accessible** — Proper ARIA labels and keyboard navigation  
+✅ **Production-Ready** — Error handling, loading states, proper styling  
+
+### Color Scheme
+- **Placement** → Blue (#2196f3) — Highest priority
+- **Result** → Orange (#ff9800) — Medium priority
+- **Event** → Green (#4caf50) — Lower priority
+
+### Time Complexity
+- Fetch: O(1) API call
+- Filter: O(N) where N = total notifications
+- Display: O(K) where K = page size
+- **Overall**: O(N)

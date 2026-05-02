@@ -11,7 +11,8 @@ const mockNotifications = [
   { ID: '6', Type: 'Result', Message: 'external', Timestamp: '2026-04-22 17:50:30' },
   { ID: '7', Type: 'Result', Message: 'project-review', Timestamp: '2026-04-22 17:50:18' },
   { ID: '8', Type: 'Event', Message: 'tech-fest', Timestamp: '2026-04-22 17:50:06' },
-  { ID: '9', Type: 'Placement', Message: 'Advanced Micro Devices Inc. hiring', Timestamp: '2026-04-22 17:49:42' }
+  { ID: '9', Type: 'Placement', Message: 'Advanced Micro Devices Inc. hiring', Timestamp: '2026-04-22 17:49:42' },
+  { ID: '10', Type: 'Event', Message: 'guest-lecture', Timestamp: '2026-04-22 17:49:30' }
 ];
 
 const priorityWeights = {

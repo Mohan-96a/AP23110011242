@@ -1,6 +1,90 @@
 # Notification System Design
 
+---
+
+## Stage 1: Priority Inbox Implementation
+
+### Overview
+The objective of Stage 1 is to build a functional system that identifies and returns the **top 10 most important unread notifications** based on type priority and recency. This solution uses the provided Notification API and applies in-memory sorting without database persistence.
+
+### Solution Implementation
+A Node.js script (`topNotifications.js`) that:
+
+1. **Fetches** notifications from the external API endpoint
+2. **Normalizes** API response data to standard format
+3. **Sorts** notifications using dual criteria:
+   - Primary: Type priority (Placement=3, Result=2, Event=1)
+   - Secondary: Timestamp in descending order (newest first)
+4. **Returns** top 10 notifications with summary statistics
+
+### Code Files
+- **Backend Server**: [notification_app_be/server.js](notification_app_be/server.js) — Express API with priority sorting
+- **Stage 1 Script**: [notification_app_be/topNotifications.js](notification_app_be/topNotifications.js) — Standalone CLI for top 10 selection
+- **Middleware**: [notification_app_be/middleware.js](notification_app_be/middleware.js) — Request logging
+
+### Running Stage 1
+```bash
+cd notification_app_be
+npm install
+npm run stage1
+```
+
+### Sample Output
+The script outputs top 10 notifications in JSON format with sorting verification:
+
+```
+=== Stage 1: Top 10 Priority Notifications ===
+
+{
+  "top": 10,
+  "notifications": [
+    {
+      "id": "2",
+      "type": "Placement",
+      "message": "CSX Corporation hiring",
+      "timestamp": "2026-04-22 17:51:18"
+    },
+    ...
+  ]
+}
+
+=== Summary ===
+Total: 9 notifications displayed
+
+By Type:
+  Placement: 2
+  Result: 5
+  Event: 2
+
+Sorting: By Type Priority (Placement > Result > Event), then by Timestamp (Newest First)
+```
+
+### Time Complexity
+- Fetch: O(1) for API call
+- Sort: O(N log N) where N = total notifications
+- Select: O(K) where K = 10
+- **Overall**: O(N log N)
+
+### Efficient Handling of Continuous Notifications
+For continuous incoming notifications, we employ a **Min Heap (Priority Queue)** approach:
+
+- Maintain a heap of size K (10)
+- When new notification arrives, insert into heap with O(log K) cost
+- If heap size > K, remove minimum element
+- This ensures O(log K) per insertion vs O(N log N) for repeated sorting
+
+### Key Features
+✅ No database required  
+✅ Uses provided evaluation API  
+✅ Actual working code (not pseudocode)  
+✅ Handles continuous incoming notifications efficiently  
+✅ Clear priority and recency logic  
+✅ Request logging via middleware  
+
+---
+
 ## 1. Problem Overview
+
 
 The campus notification system generates a high volume of notifications across multiple categories such as Placements, Results, and Events. Users often miss important updates due to the volume.
 

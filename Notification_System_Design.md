@@ -25,6 +25,12 @@ Each notification contains:
 - `message` (text content)
 - `timestamp` (date and time)
 
+## 3.1 External Evaluation API
+
+- API endpoint: `http://20.207.122.201/evaluation-service/notifications`
+- The backend fetches this API dynamically and applies priority sorting
+- No database persistence is used
+
 ## 4. Priority Logic
 
 Priority is determined using:
@@ -61,12 +67,18 @@ Sorting Rule:
 
 ### Steps:
 
-1. Fetch notifications from API
+1. Fetch notifications from evaluation API
 2. Assign priority weights based on type
 3. Sort notifications using:
    - Priority (descending)
    - Timestamp (descending)
 4. Select top `N` notifications
+
+### Stage 1 Implementation
+
+- The backend uses an Express route with logging middleware
+- Notifications are fetched from the external API, normalized, sorted, and sliced
+- The result is returned as the top `N` priority notifications
 
 ## 7. Handling Continuous Incoming Notifications
 

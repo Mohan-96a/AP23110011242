@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f9fc;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+.summary {
+  background: #fff;
+  border: 1px solid #dde2ea;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.notifications {
+  display: grid;
+  gap: 1rem;
+}
+
+.notification {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
+.notification h2 {
+  margin-top: 0;
+}
+
+.notification.placement {
+  border-left: 6px solid #2d7ff9;
+}
+
+.notification.result {
+  border-left: 6px solid #f5a623;
+}
+
+.notification.event {
+  border-left: 6px solid #45b26b;
+}
+
+.error {
+  color: #b00020;
+}

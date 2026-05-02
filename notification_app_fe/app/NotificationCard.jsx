@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import {
   Card,
@@ -53,7 +55,16 @@ export default function NotificationCard({ notification }) {
       }}
     >
       <CardContent>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: 'space-between',
+            alignItems: { xs: 'flex-start', sm: 'center' },
+            gap: 1,
+            mb: 1,
+          }}
+        >
           <Chip
             label={type}
             size="small"
@@ -66,7 +77,7 @@ export default function NotificationCard({ notification }) {
           {isRead && <Chip label="Read" size="small" variant="outlined" />}
         </Box>
 
-        <Typography variant="body1" sx={{ mb: 1 }}>
+        <Typography variant="body1" sx={{ mb: 1, wordBreak: 'break-word' }}>
           {message}
         </Typography>
 
@@ -75,9 +86,19 @@ export default function NotificationCard({ notification }) {
         </Typography>
       </CardContent>
 
-      <CardActions>
+      <CardActions
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'stretch', sm: 'center' },
+          gap: 1,
+          p: 2,
+        }}
+      >
         <Button
           size="small"
+          fullWidth
+          sx={{ width: { xs: '100%', sm: 'auto' } }}
           onClick={() => setIsRead(!isRead)}
           variant={isRead ? 'outlined' : 'contained'}
         >
@@ -86,7 +107,11 @@ export default function NotificationCard({ notification }) {
         <IconButton
           size="small"
           onClick={() => setIsSaved(!isSaved)}
-          sx={{ ml: 'auto', color: isSaved ? '#ff9800' : 'inherit' }}
+          sx={{
+            ml: { xs: 0, sm: 'auto' },
+            alignSelf: { xs: 'flex-start', sm: 'auto' },
+            color: isSaved ? '#ff9800' : 'inherit',
+          }}
         >
           {isSaved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
         </IconButton>
